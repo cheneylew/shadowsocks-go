@@ -1,1 +1,1 @@
-bee run github.com/cheneylew/shadowsocks-go/cmd/shadowsocks-server
+bee run github.com/cheneylew/shadowsocks-go/cmd/shadowsocks-myserver
