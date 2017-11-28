@@ -17,7 +17,7 @@ import (
 	"sync"
 	"syscall"
 
-	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
+	ss "github.com/cheneylew/shadowsocks-go/shadowsocks"
 	"github.com/cheneylew/goutil/utils"
 	"time"
 )
@@ -40,6 +40,14 @@ const (
 
 var debug ss.DebugLog
 var udp bool
+
+type FlowCounter struct {
+	In uint64
+	Out uint64
+	Port string
+}
+
+var FLOW_CHAN chan FlowCounter = make(chan FlowCounter)
 
 func getRequest(conn *ss.Conn, auth bool) (host string, ota bool, err error) {
 	ss.SetReadTimeout(conn)
@@ -111,6 +119,15 @@ var connCnt int
 var nextLogConnCnt int = logCntDelta
 
 func handleConnection(conn *ss.Conn, auth bool) {
+	var localPort string
+
+	arr := strings.Split(conn.Conn.LocalAddr().String(), ":")
+	if len(arr) == 2 {
+		localPort = arr[1]
+	}
+
+	utils.JJKPrintln(fmt.Sprintf("======handleConnection===%s", conn.Conn.LocalAddr().String()))
+
 	var host string
 
 	connCnt++ // this maybe not accurate, but should be enough
@@ -173,9 +190,15 @@ func handleConnection(conn *ss.Conn, auth bool) {
 	if ota {
 		go ss.PipeThenCloseOta(conn, remote)
 	} else {
-		go ss.PipeThenClose(conn, remote)
+		go func() {
+			flowOut := ss.PipeThenClose(conn, remote)
+			FLOW_CHAN <- FlowCounter{In:0,Out:uint64(flowOut),Port:localPort}
+		}()
 	}
-	ss.PipeThenClose(remote, conn)
+
+	flowIn :=ss.PipeThenClose(remote, conn)
+	FLOW_CHAN <- FlowCounter{In:uint64(flowIn),Out:0,Port:localPort}
+
 	closed = true
 	return
 }
@@ -272,13 +295,17 @@ var passwdManager = PasswdManager{portListener: map[string]*PortListener{}, udpL
 
 func updatePasswd() {
 	log.Println("updating password")
-	newconfig, err := ss.ParseConfig(configFile)
-	if err != nil {
-		log.Printf("error parsing config file %s to update password: %v\n", configFile, err)
-		return
-	}
+
+	//newconfig, err := ss.ParseConfig(configFile)
+	//if err != nil {
+	//	log.Printf("error parsing config file %s to update password: %v\n", configFile, err)
+	//	return
+	//}
+
+	var err error
+
 	oldconfig := config
-	config = newconfig
+	config = newDBConfig
 
 	if err = unifyPortPassword(config); err != nil {
 		return
@@ -390,19 +417,65 @@ func unifyPortPassword(config *ss.Config) (err error) {
 
 var configFile string
 var config *ss.Config
+var newDBConfig *ss.Config
 
-func timeTicker()  {
-	t1 := time.NewTicker(time.Millisecond * 3000)
+func timeTickerQueryPortPassword()  {
+	t1 := time.NewTicker(time.Second * time.Duration(DURATION_QUERY_PORT_PASSWORD))
 	go func() {
-		for t := range t1.C {
-			config.PortPassword["10001"]="1212121"
-			utils.JJKPrintln(config,t)
+		for range t1.C {
+			ports := dbQueryMyListenPorts()
+
+			portPassword := make(map[string]string)
+			for _, port := range ports {
+				if len(port.Port) > 0 && len(port.Password) > 0 {
+					portPassword[port.Port] = port.Password
+				}
+			}
+
+			newDBConfig = &ss.Config{
+				Timeout:600,
+				Method:"aes-256-cfb",
+				PortPassword:portPassword,
+			}
+
+			updatePasswd()
+
 		}
 	}()
 }
 
+func timeTickerUploadFlow()  {
+	t1 := time.NewTicker(time.Second * time.Duration(DURATION_UPLOAD_FLOW))
+	go func() {
+		for range t1.C {
+			dbUploadFlow()
+		}
+	}()
+}
+
+func monitorFlow()  {
+	for {
+		select {
+		case c := <- FLOW_CHAN:
+			calcFlowCount(&c)
+		}
+	}
+}
+
+func calcFlowCount(flow *FlowCounter)  {
+	//流量统计
+	SS_FlowCounterManager.add(flow.In, flow.Out, flow.Port)
+}
+
+func initConfigs()  {
+	dbStart()
+	timeTickerQueryPortPassword()
+	timeTickerUploadFlow()
+	go monitorFlow()
+}
+
 func main() {
-	timeTicker()
+	initConfigs()
 
 	log.SetOutput(os.Stdout)
 
@@ -426,6 +499,7 @@ func main() {
 		os.Exit(0)
 	}
 
+	debug = SS_DEBUG
 	ss.SetDebug(debug)
 
 	if strings.HasSuffix(cmdConfig.Method, "-auth") {
