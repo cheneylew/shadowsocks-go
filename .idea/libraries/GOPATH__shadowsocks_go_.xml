@@ -1,0 +1,82 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;shadowsocks-go&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../.DS_Store" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../sourcegraph.com" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../../gowb" />
+      <root url="file://$PROJECT_DIR$/../../../labix.org" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$PROJECT_DIR$/../../astaxie/beego/.git" />
+      <root url="file://$PROJECT_DIR$/../../astaxie/beego/.github" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/html/charset/testdata" />
+      <root url="file://$PROJECT_DIR$/../../nsf/gocode/_gccgo" />
+      <root url="file://$PROJECT_DIR$/../../nfnt/resize/.git" />
+      <root url="file://$PROJECT_DIR$/.idea" />
+      <root url="file://$PROJECT_DIR$/../../shadowsocks/shadowsocks-go/.git" />
+      <root url="file://$PROJECT_DIR$/../../tpng/gopkgs/.git" />
+      <root url="file://$PROJECT_DIR$/../../PuerkitoBio/goquery/testdata" />
+      <root url="file://$PROJECT_DIR$/../../ramya-rao-a/go-outline/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/http2/testdata" />
+      <root url="file://$PROJECT_DIR$/../../imroc/biu/.git" />
+      <root url="file://$PROJECT_DIR$/../../rogpeppe/godef/go/printer/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/crypto/ssh/testdata" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$PROJECT_DIR$/../../golang/lint/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../sourcegraph.com/sqs/goreturns/.git" />
+      <root url="file://$PROJECT_DIR$/../../golang/lint/.git" />
+      <root url="file://$PROJECT_DIR$/../../fatedier/frp/.github" />
+      <root url="file://$PROJECT_DIR$/../../../sourcegraph.com/sqs/goreturns/_samples" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in/warnings.v0/.git" />
+      <root url="file://$PROJECT_DIR$/../../nsf/gocode/_goremote" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in/gcfg.v1/.git" />
+      <root url="file://$PROJECT_DIR$/../../nsf/gocode/_testing" />
+      <root url="file://$PROJECT_DIR$/.git" />
+      <root url="file://$PROJECT_DIR$/../../fatedier/frp/.git" />
+      <root url="file://$PROJECT_DIR$/../../cyfdecyf/bufio/.git" />
+      <root url="file://$PROJECT_DIR$/../../cyfdecyf/cow/.git" />
+      <root url="file://$PROJECT_DIR$/../../fatih/gomodifytags/.git" />
+      <root url="file://$PROJECT_DIR$/../../josharian/impl/.git" />
+      <root url="file://$PROJECT_DIR$/../../dchest/captcha/.git" />
+      <root url="file://$PROJECT_DIR$/../../rogpeppe/godef/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/crypto/ed25519/testdata" />
+      <root url="file://$PROJECT_DIR$/../../nsf/gocode/.git" />
+      <root url="file://$PROJECT_DIR$/../../cyfdecyf/color/.git" />
+      <root url="file://$PROJECT_DIR$/../../cyfdecyf/cow/testdata" />
+      <root url="file://$PROJECT_DIR$/../../cyfdecyf/leakybuf/.git" />
+      <root url="file://$PROJECT_DIR$/../../henrylee2cn/goutil/.git" />
+      <root url="file://$PROJECT_DIR$/../../PuerkitoBio/goquery/.git" />
+      <root url="file://$PROJECT_DIR$/shadowsocks/testdata" />
+      <root url="file://$PROJECT_DIR$/../../go-sql-driver/mysql/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/.git" />
+      <root url="file://$PROJECT_DIR$/../../cweill/gotests/testdata" />
+      <root url="file://$PROJECT_DIR$/../../Yawning/chacha20/.git" />
+      <root url="file://$PROJECT_DIR$/../../shadowsocks/shadowsocks-go/shadowsocks/testdata" />
+      <root url="file://$PROJECT_DIR$/../../cweill/gotests/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/crypto/sha3/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in/h2non/bimg.v1/.git" />
+      <root url="file://$PROJECT_DIR$/../../cweill/gotests/gotests/process/testdata" />
+      <root url="file://$PROJECT_DIR$/../../beego/bee/.git" />
+      <root url="file://$PROJECT_DIR$/../../astaxie/beego/utils/testdata" />
+      <root url="file://$PROJECT_DIR$/../../go-sql-driver/mysql/.travis" />
+      <root url="file://$PROJECT_DIR$/../../go-sql-driver/mysql/.github" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/bpf/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/crypto/.git" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/html/testdata" />
+      <root url="file://$PROJECT_DIR$/../../andybalholm/cascadia/.git" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in/gcfg.v1/testdata" />
+      <root url="file://$PROJECT_DIR$/../../sqs/goreturns/.git" />
+      <root url="file://$PROJECT_DIR$/../../acroca/go-symbols/.git" />
+      <root url="file://$PROJECT_DIR$/../../sqs/goreturns/_samples" />
+      <root url="file://$PROJECT_DIR$/../goutil/.git" />
+      <root url="file://$PROJECT_DIR$/../beego_api/.git" />
+      <root url="file://$PROJECT_DIR$/../beego_api/.idea" />
+      <root url="file://$PROJECT_DIR$/../goutil/.idea" />
+    </excluded>
+  </library>
+</component>

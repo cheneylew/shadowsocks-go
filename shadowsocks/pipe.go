@@ -15,10 +15,12 @@ func SetReadTimeout(c net.Conn) {
 }
 
 // PipeThenClose copies data from src to dst, closes dst when done.
-func PipeThenClose(src, dst net.Conn) {
+func PipeThenClose(src, dst net.Conn) int {
 	defer dst.Close()
 	buf := leakyBuf.Get()
 	defer leakyBuf.Put(buf)
+
+	var bytesCount int = 0
 	for {
 		SetReadTimeout(src)
 		n, err := src.Read(buf)
@@ -31,6 +33,9 @@ func PipeThenClose(src, dst net.Conn) {
 				break
 			}
 		}
+
+		bytesCount += n;
+
 		if err != nil {
 			// Always "use of closed network connection", but no easy way to
 			// identify this specific error. So just leave the error along for now.
@@ -43,6 +48,8 @@ func PipeThenClose(src, dst net.Conn) {
 			break
 		}
 	}
+
+	return bytesCount
 }
 
 // PipeThenClose copies data from src to dst, closes dst when done, with ota verification.
