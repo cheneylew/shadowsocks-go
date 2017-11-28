@@ -1,3 +1,5 @@
 *.deb
 script/http
 bin
+cmd/shadowsocks-myserver/shadowsocks-myserver
+cmd/shadowsocks-server/shadowsocks-server
