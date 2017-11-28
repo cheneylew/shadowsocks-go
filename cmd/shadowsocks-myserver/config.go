@@ -11,6 +11,12 @@ var DURATION_UPLOAD_FLOW int64 = 7
 var SS_DEBUG ss.DebugLog = true
 var SS_FlowCounterManager FlowCounterManager = FlowCounterManager{flowCounter:map[string]*FlowCounter{}}
 
+func init() {
+	PORT_PASSWORD = make(map[string]string)
+	PORT_PASSWORD["10004"] = "11111111"
+
+}
+
 type FlowCounterManager struct {
 	sync.Mutex
 	flowCounter map[string]*FlowCounter
@@ -56,10 +62,4 @@ func (pm *FlowCounterManager) del(port string) {
 	pm.Lock()
 	delete(pm.flowCounter, port)
 	pm.Unlock()
-}
-
-func init() {
-	PORT_PASSWORD = make(map[string]string)
-	PORT_PASSWORD["10004"] = "11111111"
-
 }
